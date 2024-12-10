@@ -332,3 +332,19 @@ initCharts();
 updateAlgorithmList();
 updateDataGrowthList();
 updateClusterList();
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggleView');
+    const basicoContent = document.getElementById('basico');
+    const avanzadoContent = document.getElementById('avanzado');
+
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+});
