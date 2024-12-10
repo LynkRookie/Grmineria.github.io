@@ -1,0 +1,166 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #000000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation Styles */
+.nav {
+    background-color: #000000;
+    color: #fff;
+    padding: 1rem;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.nav-link.active {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Section Styles */
+.section {
+    margin-bottom: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #007bff;
+}
+
+/* Glossary Styles */
+.toggle-button {
+    display: block;
+    margin: 0 auto 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #0056b3;
+}
+
+.glosario-content {
+    display: none;
+}
+
+.glosario-content.active {
+    display: block;
+}
+
+.glosario-content h2 {
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.glosario-content dl {
+    margin: 0;
+}
+
+.glosario-content dt {
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #333;
+}
+
+.glosario-content dd {
+    margin-left: 0;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid #007bff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-link {
+        padding: 0.5rem 0;
+    }
+}
+
+/* Animation Styles */
+[data-aos] {
+    opacity: 0;
+    transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(100px);
+}
+
+[data-aos="fade-down"] {
+    transform: translateY(-100px);
+}
+
+[data-aos="fade-right"] {
+    transform: translateX(-100px);
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(100px);
+}
+
+[data-aos="zoom-in"] {
+    transform: scale(0.6);
+}
+
+[data-aos].aos-animate {
+    transform: translateX(0) translateY(0) scale(1);
+}
