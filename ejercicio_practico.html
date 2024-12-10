@@ -89,6 +89,35 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+        
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    navLinks.classList.toggle('active');
+                });
+        
+                // Cerrar menú al hacer clic fuera
+                document.addEventListener('click', function(event) {
+                    if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+        
+                // Cerrar menú al hacer clic en un enlace de navegación
+                const navLinksItems = document.querySelectorAll('.nav-link');
+                navLinksItems.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+        });
+        </script>
 </body>
 </html>
 
