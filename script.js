@@ -1,4 +1,39 @@
-// Datos iniciales (sin cambios)
+// Initial data
+let algorithmData = [
+    { name: 'Decision Trees', accuracy: 85, speed: 90 },
+    { name: 'Random Forest', accuracy: 92, speed: 75 },
+    { name: 'SVM', accuracy: 88, speed: 60 },
+    { name: 'K-Means', accuracy: 78, speed: 95 },
+    { name: 'Neural Networks', accuracy: 94, speed: 50 },
+];
+
+let dataGrowthData = [
+    { year: 2010, dataVolume: 1 },
+    { year: 2012, dataVolume: 2.5 },
+    { year: 2014, dataVolume: 4.4 },
+    { year: 2016, dataVolume: 8.5 },
+    { year: 2018, dataVolume: 18 },
+    { year: 2020, dataVolume: 44 },
+    { year: 2022, dataVolume: 97 },
+];
+
+const dataTypesData = [
+    { name: 'Structured', value: 20 },
+    { name: 'Semi-structured', value: 30 },
+    { name: 'Unstructured', value: 50 },
+];
+
+let clusterData = [
+    { x: 10, y: 30, cluster: 'A' },
+    { x: 40, y: 30, cluster: 'A' },
+    { x: 45, y: 40, cluster: 'A' },
+    { x: 20, y: 50, cluster: 'B' },
+    { x: 30, y: 70, cluster: 'B' },
+    { x: 50, y: 60, cluster: 'B' },
+    { x: 70, y: 20, cluster: 'C' },
+    { x: 80, y: 30, cluster: 'C' },
+    { x: 90, y: 40, cluster: 'C' },
+];
 
 // Instancias de gráficos
 let algorithmChart, dataGrowthChart, dataTypesChart, clusteringChart;
@@ -117,32 +152,183 @@ function initCharts() {
     });
 }
 
-// Mostrar detalles del algoritmo (sin cambios)
+// Show algorithm details
+function showAlgorithmDetails(algorithm) {
+    const detailsElement = document.getElementById('algorithmDetails');
+    const nameElement = document.getElementById('selectedAlgorithm');
+    const statsElement = document.getElementById('algorithmStats');
 
-// Agregar nuevo algoritmo (sin cambios)
+    nameElement.textContent = algorithm.name;
+    statsElement.textContent = `${algorithm.accuracy}% accuracy, ${algorithm.speed}% speed`;
+    detailsElement.style.display = 'block';
+}
 
-// Agregar nuevo punto de crecimiento de datos (sin cambios)
+// Add new algorithm
+document.getElementById('addAlgorithmForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('algorithmName').value;
+    const accuracy = Number(document.getElementById('algorithmAccuracy').value);
+    const speed = Number(document.getElementById('algorithmSpeed').value);
 
-// Agregar nuevo punto de cluster (sin cambios)
+    algorithmData.push({ name, accuracy, speed });
+    updateAlgorithmChart();
+    updateAlgorithmList();
+    this.reset();
+});
 
-// Actualizar gráficos (sin cambios)
+// Add new data growth point
+document.getElementById('addDataGrowthForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const year = Number(document.getElementById('dataGrowthYear').value);
+    const dataVolume = Number(document.getElementById('dataGrowthVolume').value);
 
-// Actualizar listas de datos (sin cambios)
+    dataGrowthData.push({ year, dataVolume });
+    updateDataGrowthChart();
+    updateDataGrowthList();
+    this.reset();
+});
 
-// Funciones de eliminación (sin cambios)
+// Add new cluster point
+document.getElementById('addClusterPointForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const x = Number(document.getElementById('clusterX').value);
+    const y = Number(document.getElementById('clusterY').value);
+    const cluster = document.getElementById('clusterName').value;
 
-// Funciones de reinicio (sin cambios)
+    clusterData.push({ x, y, cluster });
+    updateClusteringChart();
+    updateClusterList();
+    this.reset();
+});
 
-// Inicializar todo
+// Update charts
+function updateAlgorithmChart() {
+    algorithmChart.data.labels = algorithmData.map(d => d.name);
+    algorithmChart.data.datasets[0].data = algorithmData.map(d => d.accuracy);
+    algorithmChart.data.datasets[1].data = algorithmData.map(d => d.speed);
+    algorithmChart.update();
+}
+
+function updateDataGrowthChart() {
+    dataGrowthChart.data.labels = dataGrowthData.map(d => d.year);
+    dataGrowthChart.data.datasets[0].data = dataGrowthData.map(d => d.dataVolume);
+    dataGrowthChart.update();
+}
+
+function updateClusteringChart() {
+    clusteringChart.data.datasets[0].data = clusterData.filter(d => d.cluster === 'A');
+    clusteringChart.data.datasets[1].data = clusterData.filter(d => d.cluster === 'B');
+    clusteringChart.data.datasets[2].data = clusterData.filter(d => d.cluster === 'C');
+    clusteringChart.update();
+}
+
+// Update data lists
+function updateAlgorithmList() {
+    const list = document.getElementById('algorithmList');
+    list.innerHTML = '';
+    algorithmData.forEach((algo, index) => {
+        const item = document.createElement('div');
+        item.className = 'data-item';
+        item.innerHTML = `
+            <span>${algo.name}: ${algo.accuracy}% accuracy, ${algo.speed}% speed</span>
+            <button onclick="deleteAlgorithm(${index})">Delete</button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function updateDataGrowthList() {
+    const list = document.getElementById('dataGrowthList');
+    list.innerHTML = '';
+    dataGrowthData.forEach((data, index) => {
+        const item = document.createElement('div');
+        item.className = 'data-item';
+        item.innerHTML = `
+            <span>${data.year}: ${data.dataVolume} ZB</span>
+            <button onclick="deleteDataGrowth(${index})">Delete</button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function updateClusterList() {
+    const list = document.getElementById('clusterList');
+    list.innerHTML = '';
+    clusterData.forEach((point, index) => {
+        const item = document.createElement('div');
+        item.className = 'data-item';
+        item.innerHTML = `
+            <span>(${point.x}, ${point.y}) - Cluster ${point.cluster}</span>
+            <button onclick="deleteClusterPoint(${index})">Delete</button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+// Delete functions
+function deleteAlgorithm(index) {
+    algorithmData.splice(index, 1);
+    updateAlgorithmChart();
+    updateAlgorithmList();
+}
+
+function deleteDataGrowth(index) {
+    dataGrowthData.splice(index, 1);
+    updateDataGrowthChart();
+    updateDataGrowthList();
+}
+
+function deleteClusterPoint(index) {
+    clusterData.splice(index, 1);
+    updateClusteringChart();
+    updateClusterList();
+}
+
+// Reset functions
+document.getElementById('resetAlgorithmData').addEventListener('click', function() {
+    algorithmData = [
+        { name: 'Decision Trees', accuracy: 85, speed: 90 },
+        { name: 'Random Forest', accuracy: 92, speed: 75 },
+        { name: 'SVM', accuracy: 88, speed: 60 },
+        { name: 'K-Means', accuracy: 78, speed: 95 },
+        { name: 'Neural Networks', accuracy: 94, speed: 50 },
+    ];
+    updateAlgorithmChart();
+    updateAlgorithmList();
+});
+
+document.getElementById('resetDataGrowthData').addEventListener('click', function() {
+    dataGrowthData = [
+        { year: 2010, dataVolume: 1 },
+        { year: 2012, dataVolume: 2.5 },
+        { year: 2014, dataVolume: 4.4 },
+        { year: 2016, dataVolume: 8.5 },
+        { year: 2018, dataVolume: 18 },
+        { year: 2020, dataVolume: 44 },
+        { year: 2022, dataVolume: 97 },
+    ];
+    updateDataGrowthChart();
+    updateDataGrowthList();
+});
+
+document.getElementById('resetClusterData').addEventListener('click', function() {
+    clusterData = [
+        { x: 10, y: 30, cluster: 'A' },
+        { x: 40, y: 30, cluster: 'A' },
+        { x: 45, y: 40, cluster: 'A' },
+        { x: 20, y: 50, cluster: 'B' },
+        { x: 30, y: 70, cluster: 'B' },
+        { x: 50, y: 60, cluster: 'B' },
+        { x: 70, y: 20, cluster: 'C' },
+        { x: 80, y: 30, cluster: 'C' },
+        { x: 90, y: 40, cluster: 'C' },
+    ];
+    updateClusteringChart();
+    updateClusterList();
+});
+
+// Initialize everything
 initCharts();
 updateAlgorithmList();
 updateDataGrowthList();
 updateClusterList();
-
-// Agregar event listener para redimensionar los gráficos
-window.addEventListener('resize', () => {
-    algorithmChart.resize();
-    dataGrowthChart.resize();
-    dataTypesChart.resize();
-    clusteringChart.resize();
-});
