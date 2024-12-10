@@ -1,0 +1,222 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #ffffff;
+    background-color: #0a0a0a;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation styles */
+.nav {
+    background-color: #0a0a0af2;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-top: -1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #3498db;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Section styles */
+.section {
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    text-align: center;
+    color: #3498db;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* Content block styles */
+.content-block {
+    display: flex;
+    gap: 4rem;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.image-content {
+    flex: 1;
+}
+
+.image-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Etapas styles */
+.container-main-etapas {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.container-etapas {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.container-etapas:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.title-etapas {
+    color: #3498db;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.container-texto-etapas {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    color: #3498db;
+    font-size: 2rem;
+    margin: 0 -1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .content-block {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .container-main-etapas {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-content {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #0a0a0af2;
+        padding: 1rem;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: 0;
+    }
+
+    .image-content img {
+        width: 100%;
+    }
+    .arrow {
+        transform: rotate(90deg);
+        margin: 1rem auto;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .nav {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .content-block {
+        flex-direction: column;
+    }
+
+    .image-content img {
+        width: 100%;
+    }
+    .container-etapas {
+        padding: 1rem;
+    }
+
+    .title-etapas {
+        font-size: 1rem;
+    }
+
+    .container-texto-etapas {
+        font-size: 0.9rem;
+    }
+}
+
